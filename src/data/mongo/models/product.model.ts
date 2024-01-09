@@ -28,5 +28,12 @@ const productSchema = new mongoose.Schema({
         required: [true, 'Category is required'],
     },
 });
+productSchema.set('toJSON', {
+    virtuals: true,
+    versionKey: false,
+    transform: function (doc: any, ret: any) {
+        delete ret._id;
+    },
+});
 
 export const ProductModel = mongoose.model('Product', productSchema);
